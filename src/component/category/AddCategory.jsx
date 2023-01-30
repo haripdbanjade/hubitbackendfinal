@@ -26,7 +26,7 @@ function AddCourse({ Categorys }) {
             // formData.append("description", e.description);
             formData.append("file", first[0]);
 
-            return axios.post("https://himal-hubitbackend.adaptable.app/category/files", formData);
+            return axios.post("https://hubitbackend.onrender.com/category/files", formData);
         }
         catch (err) {
             console.log(err);

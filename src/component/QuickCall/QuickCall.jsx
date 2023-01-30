@@ -8,7 +8,7 @@ function QuickCall() {
     const FetchQuickCall = () => {
         try {
             axios
-                .get("https://himal-hubitbackend.adaptable.app/quickcall/")
+                .get("https://hubitbackend.onrender.com/quickcall/")
                 .then(res => {
                     console.log(res.data);
                     setQuickCall(res.data.data);
@@ -25,7 +25,7 @@ function QuickCall() {
     }, []);
     const handleDelete = _id => {
         axios
-            .delete(`https://himal-hubitbackend.adaptable.app/quickcall/${_id}`, handleDelete)
+            .delete(`https://hubitbackend.onrender.com/quickcall/${_id}`, handleDelete)
             .then(res => console.log("deleted", res))
             .catch(err => console.log(err));
     };

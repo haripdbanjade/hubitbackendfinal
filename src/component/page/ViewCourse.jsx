@@ -9,7 +9,7 @@ function ViewCourse({ courseActive, setcourseActive }) {
   const FetchData = () => {
     try {
       axios
-        .get("https://himal-hubitbackend.adaptable.app/course/")
+        .get("https://hubitbackend.onrender.com/course/")
         .then(res => {
           console.log(res.data);
           setCourse(res.data.data);
@@ -27,7 +27,7 @@ function ViewCourse({ courseActive, setcourseActive }) {
   // Delete request
   const handleDelete = _id => {
     axios
-      .delete(`https://himal-hubitbackend.adaptable.app/course/${_id}`, handleDelete)
+      .delete(`https://hubitbackend.onrender.com/course/${_id}`, handleDelete)
     alert(`Deleting item whose id is ${_id}`)
       .then(res => console.log("deleted", res))
       .catch(err => console.log(err));
@@ -60,7 +60,7 @@ function ViewCourse({ courseActive, setcourseActive }) {
             <td>{data.course_name}</td>
             <td className="border-2 h-32 w-32">
               <div >
-                <img src={`https://himal-hubitbackend.adaptable.app/${data.image}`} className="w-fit h-fit" alt="Course" />
+                <img src={`https://hubitbackend.onrender.com/${data.image}`} className="w-fit h-fit" alt="Course" />
               </div>
             </td>
             <td>{data.course_category}</td>

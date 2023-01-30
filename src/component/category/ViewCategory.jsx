@@ -10,7 +10,7 @@ function ViewCategory({ Categorys }) {
     const FetchData = () => {
         try {
             axios
-                .get("https://himal-hubitbackend.adaptable.app/category/")
+                .get("https://hubitbackend.onrender.com/category/")
                 .then(res => {
                     // console.log(res.data);
                     setCourse(res.data.data);
@@ -29,7 +29,7 @@ function ViewCategory({ Categorys }) {
     const handleDelete = _id => {
         try {
             axios
-                .delete(`https://himal-hubitbackend.adaptable.app/category/${_id}`, handleDelete)
+                .delete(`https://hubitbackend.onrender.com/category/${_id}`, handleDelete)
             alert(`Deleting item whose id is ${_id}`)
                 .then(res => console.log("deleted", res))
                 .catch(err => console.log(err));

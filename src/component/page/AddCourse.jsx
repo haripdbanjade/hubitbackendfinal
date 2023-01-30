@@ -29,7 +29,7 @@ function AddCourse({ setcourseActive, courseActive }) {
       formData.append("description", e.description);
       formData.append("file", first[0]);
 
-      return axios.post("https://himal-hubitbackend.adaptable.app/course/files", formData);
+      return axios.post("https://hubitbackend.onrender.com/course/files", formData);
     }
     catch (err) {
       console.log(err);
@@ -65,7 +65,7 @@ function AddCourse({ setcourseActive, courseActive }) {
   const [category, setCategory] = useState([]);
   const FetchData = () => {
     try {
-      axios.get("https://himal-hubitbackend.adaptable.app/category")
+      axios.get("https://hubitbackend.onrender.com/category")
         .then((res) => {
           console.log(res.data);
           setCategory(res.data.data);

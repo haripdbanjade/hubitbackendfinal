@@ -20,7 +20,7 @@ function EditCourse() {
     const { id } = useParams();
     const getData = async () => {
         try {
-            const res = await axios.get(`https://himal-hubitbackend.adaptable.app/course/${id}`)
+            const res = await axios.get(`https://hubitbackend.onrender.com/course/${id}`)
             setCourse(res.data.data);
             console.log(res.data.data);
         } catch (error) {
@@ -43,7 +43,7 @@ function EditCourse() {
             formData.append("description", val.description);
             formData.append("file", first[0]);
 
-            return axios.put(`https://himal-hubitbackend.adaptable.app/course/files/${id}`, formData);
+            return axios.put(`https://hubitbackend.onrender.com/course/files/${id}`, formData);
         }
         catch (err) {
             console.log("nope");
@@ -80,7 +80,7 @@ function EditCourse() {
     const [category, setCategory] = useState([]);
     const FetchData = () => {
         try {
-            axios.get("https://himal-hubitbackend.adaptable.app/category")
+            axios.get("https://hubitbackend.onrender.com/category")
                 .then((res) => {
                     console.log(res.data);
                     setCategory(res.data.data);

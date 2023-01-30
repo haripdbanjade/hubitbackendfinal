@@ -29,7 +29,7 @@ function EditEnquiry() {
     console.log(id);
     const getData = async () => {
         try {
-            const res = await axios.get(`https://himal-hubitbackend.adaptable.app/inquire/${id}`)
+            const res = await axios.get(`https://hubitbackend.onrender.com/inquire/${id}`)
             setEnquiry(res.data);
             console.log(res.data);
         } catch (error) {
@@ -42,7 +42,7 @@ function EditEnquiry() {
 
     const postFormData = (val) => {
         try {
-            return axios.put(`https://himal-hubitbackend.adaptable.app/inquire/${id}`, val)
+            return axios.put(`https://hubitbackend.onrender.com/inquire/${id}`, val)
         } catch (error) {
 
         }

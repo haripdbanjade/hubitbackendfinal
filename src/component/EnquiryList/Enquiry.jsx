@@ -9,7 +9,7 @@ function Enquiry() {
     const FetchEnquiry = () => {
         try {
             axios
-                .get("https://himal-hubitbackend.adaptable.app/inquire/")
+                .get("https://hubitbackend.onrender.com/inquire/")
                 .then(res => {
                     console.log(res.data);
                     setEnquiry(res.data.data);
@@ -26,7 +26,7 @@ function Enquiry() {
     }, []);
     const handleDelete = _id => {
         axios
-            .delete(`https://himal-hubitbackend.adaptable.app/inquire/${_id}`, handleDelete)
+            .delete(`https://hubitbackend.onrender.com/inquire/${_id}`, handleDelete)
             .then(res => console.log("deleted", res))
             .catch(err => console.log(err));
     };
