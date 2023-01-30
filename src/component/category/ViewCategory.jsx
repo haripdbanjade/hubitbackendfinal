@@ -68,7 +68,7 @@ function ViewCategory({ Categorys }) {
                         <td>{data.category_name}</td>
                         <td className="border-2 h-32 w-32">
                             <div className="w-32 h-32">
-                                <img src={`https://himal-hubitbackend.adaptable.app/${data.image}`} className="w-32 h-32" alt="Course" />
+                                <img src={`https://hubitbackend.onrender.com/${data.image}`} className="w-32 h-32" alt="Course" />
                             </div>
                         </td>
                         <td className="text-center">
