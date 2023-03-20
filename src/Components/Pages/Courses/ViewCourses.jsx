@@ -94,7 +94,7 @@ function ViewCourse() {
                 {data.course_category}
               </td>
               <td className="py-3 px-4 border-l border-r">{data.duration}</td>
-              <td className="py-3 px-4 border-l border-r">
+              <td className="py-3 px-4 border-l border-r line-clamp-6">
                 {data.description}
               </td>
               <td className="py-3 px-4 border-l border-r">

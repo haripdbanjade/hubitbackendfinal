@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect } from "react";
-const URL = "http://192.168.0.27:4000/instructor";
+const URL = "https://fullel-backend.adaptable.app/instructor";
 const ViewInstructor = () => {
   const getData = async () => {
     const res = await axios.get(URL);

@@ -41,9 +41,9 @@ function ViewSyallabus() {
 
   return (
     <div className="flex selection:text-white selection:bg-[#a0047d] pr-10">
-      <table className="border-2  mx-auto font-bold w-[100%] bg-gray-100  mt-[10vh] shadow-xl shadow-gray-500 ">
+      <table className="border-2  mx-auto font-bold w-[80%] bg-gray-100  mt-[10vh] shadow-xl shadow-gray-500 ">
         <tr className="border-2 text-center text-xl">
-          <th className="border-2 border-[#a0047d] py-5 ">S.No</th>
+          <th className="border-2 border-[#a0047d] py-2">S.No</th>
           <th className="border-2 border-[#a0047d]">Section_name</th>
           <th className="border-2 border-[#a0047d]">Action</th>
           <th className="border-2 border-[#a0047d]">Sub Syallabus</th>
@@ -72,7 +72,7 @@ function ViewSyallabus() {
             </td>
             <td className="border-black border-2 py-5">
               <Link
-                className="text-2xl py-[1px] px-4 border-2 shadow-md hover:shadow-gray-100 font-bold"
+                className="text-2xl py-[1px] px-2 border-2 shadow-md hover:shadow-gray-100 font-bold"
                 to={`/subcourse/${id}`}>
                 View
               </Link>

@@ -4,7 +4,7 @@ import { toast, ToastContainer } from "react-toastify";
 import axios from "axios";
 import * as yup from "yup";
 import { useLocation, useParams } from "react-router-dom";
-const URL = "http://192.168.1.157:4000/syallabus";
+const URL = "https://fullel-backend.adaptable.app/syallabus";
 
 const schema = yup.object().shape({
   Section: yup.string().required("section  is required"),
@@ -35,7 +35,7 @@ const EditSyallabus = () => {
     console.log(val);
     try {
       await axios.put(`${URL}/${id}/${val.section_id}`, val).then((res) => {
-        if (res.status === 201) {
+        if (res.status >= 200) {
           toast.success("the data posted");
         }
       });
