@@ -44,74 +44,90 @@ function ViewCourse() {
   //     .catch(err => console.log(err))
   // }
   return (
-    <table className="table-auto w-full mt-10 bg-white rounded-lg shadow-lg">
-      <thead className="bg-gray-100 text-gray-600 uppercase text-sm leading-normal">
-        <tr>
-          <th className="py-3 px-4 border-r border-b border-gray-200">S.No</th>
-          <th className="py-3 px-4 border-r border-b border-gray-200">Name</th>
-          <th className="py-3 px-4 border-r border-b border-gray-200">Image</th>
-          <th className="py-3 px-4 border-r border-b border-gray-200">
-            Category
-          </th>
-          <th className="py-3 px-4 border-r border-b border-gray-200">
-            Duration
-          </th>
-          <th className="py-3 px-4 border-r border-b border-gray-200">
-            Description
-          </th>
-          <th className="py-3 px-4 border-r border-b border-gray-200">
-            Action
-          </th>
-          <th className="py-3 px-4 border-b border-gray-200">View Syllabus</th>
-        </tr>
-      </thead>{" "}
-      <tbody className="text-gray-600 text-sm font-light">
-        {course.map((data, i) => (
-          <tr key={i} className="border-b border-gray-200 hover:bg-gray-100">
-            <td className="py-3 px-4 border-l">{i + 1}</td>
-            <td className="py-3 px-4 border-l border-r">{data.course_name}</td>
-            <td className="py-3 px-4 border-l border-r">
-              <div className="h-32 w-32">
-                <img
-                  src={data.image}
-                  className="object-cover w-full h-full"
-                  alt="Course"
-                />
-              </div>
-            </td>
-            <td className="py-3 px-4 border-l border-r">
-              {data.course_category}
-            </td>
-            <td className="py-3 px-4 border-l border-r">{data.duration}</td>
-            <td className="py-3 px-4 border-l border-r">{data.description}</td>
-            <td className="py-3 px-4 border-l border-r">
-              <div className="flex gap-3">
-                <div
-                  className="text-red-600 text-2xl cursor-pointer"
-                  onClick={() => {
-                    handleDelete(data._id);
-                  }}>
-                  <RiDeleteBin6Line />
-                </div>
-                <Link
-                  className="text-blue-400 text-2xl font-bold cursor-pointer"
-                  state={data}
-                  to={{
-                    pathname: `/editcourse/${data._id}`,
-                  }}>
-                  <GrUpdate />
-                </Link>
-              </div>
-            </td>
-            <td className="py-3 px-4 border-l">
-              <Link className="text-2xl" to={`/syllabus/${data._id}`}>
-                More....
-              </Link>
-            </td>
+    <div className="pr-5">
+      <table className="table-auto w-full mt-10  rounded-lg shadow-lg">
+        <thead className="bg-gray-100 text-gray-600 uppercase text-sm leading-normal">
+          <tr>
+            <th className="py-3 px-6 border-r border-b border-gray-200">
+              S.No
+            </th>
+            <th className="py-3 px-6 border-r border-b border-gray-200">
+              Name
+            </th>
+            <th className="py-3 px-4 border-r border-b border-gray-200">
+              Image
+            </th>
+            <th className="py-3 px-6 border-r border-b border-gray-200">
+              Category
+            </th>
+            <th className="py-3 px-6 border-r border-b border-gray-200">
+              Duration
+            </th>
+            <th className="py-3 px-10 border-r border-b border-gray-200">
+              Description
+            </th>
+            <th className="py-3 px-6 border-r border-b border-gray-200">
+              Action
+            </th>
+            <th className="py-3 px-6 border-b border-gray-200">
+              View Syllabus
+            </th>
           </tr>
-        ))}
-      </tbody>
-    </table>
+        </thead>{" "}
+        <tbody className="text-gray-600 text-sm font-light">
+          {course.map((data, i) => (
+            <tr key={i} className="border-b border-gray-200 hover:bg-gray-100">
+              <td className="py-3 px-4 border-l text-center">{i + 1}</td>
+              <td className="py-3 px-4 border-l border-r">
+                {data.course_name}
+              </td>
+              <td className="py-3 px-4 border-l border-r">
+                <div className="h-32 w-32">
+                  <img
+                    src={data.image}
+                    className="object-cover w-full h-full"
+                    alt="Course"
+                  />
+                </div>
+              </td>
+              <td className="py-3 px-4 border-l border-r">
+                {data.course_category}
+              </td>
+              <td className="py-3 px-4 border-l border-r">{data.duration}</td>
+              <td className="py-3 px-4 border-l border-r">
+                {data.description}
+              </td>
+              <td className="py-3 px-4 border-l border-r">
+                <div className="flex gap-3">
+                  <div
+                    className="text-red-600 text-2xl cursor-pointer"
+                    onClick={() => {
+                      handleDelete(data._id);
+                    }}>
+                    <RiDeleteBin6Line />
+                  </div>
+                  <Link
+                    className="text-blue-400 text-2xl font-bold cursor-pointer"
+                    state={data}
+                    to={{
+                      pathname: `/editcourse/${data._id}`,
+                    }}>
+                    <GrUpdate />
+                  </Link>
+                </div>
+              </td>
+              <td className="py-3 px-4 border-l">
+                <Link
+                  className="text-2xl py-[1px] px-4 border-2 shadow-md hover:shadow-gray-100 font-bold "
+                  to={`/syllabus/${data._id}`}>
+                  View
+                </Link>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
   );
 }
 

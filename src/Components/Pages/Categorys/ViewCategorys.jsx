@@ -48,8 +48,9 @@ function ViewCategorys() {
           <tr>
             <th className="border-2 px-4 py-2">SN</th>
             <th className="border-2 px-4 py-2">Category Name</th>
-            <th className="border-2 px-4 py-2">Image</th>
-            <th className="border-2 px-4 py-2">Color</th>
+            {/* <th className="border-2 px-4 py-2">Image</th> */}
+            {/* <th className="border-2 px-4 py-2">Color</th> */}
+            <th className="border-2 px-4 py-2">Created At</th>
             <th className="border-2 px-4 py-2">Action</th>
           </tr>
         </thead>
@@ -64,7 +65,7 @@ function ViewCategorys() {
               <td className="border-2 text-center px-4 py-2">
                 {data.category_name}
               </td>
-              <td className="border-2 text-center px-4 py-2">
+              {/* <td className="border-2 text-center px-4 py-2">
                 <div className="w-32 text-center overflow-hidden">
                   <img
                     src={data.image}
@@ -72,8 +73,11 @@ function ViewCategorys() {
                     alt="Course"
                   />
                 </div>
+              </td> */}
+              {/* <td className="border-2 text-center px-4 py-2">{data.color}</td> */}
+              <td className="border-2 text-center px-4 py-2">
+                {data.createdAt}
               </td>
-              <td className="border-2 text-center px-4 py-2">{data.color}</td>
               <td className="border-2 px-4 py-2">
                 <div className="flex gap-3 items-center justify-center">
                   <div
@@ -85,7 +89,8 @@ function ViewCategorys() {
                   </div>
                   <Link
                     className="text-blue-400 text-2xl font-bold cursor-pointer"
-                    to={`/editcourse/${data._id}`}>
+                    state={data}
+                    to={`/category/${data._id}`}>
                     <GrUpdate />
                   </Link>
                 </div>

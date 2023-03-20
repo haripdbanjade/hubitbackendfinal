@@ -3,8 +3,8 @@ import AddSyallabus from "./AddSyallabus";
 import ViewSyallabus from "./ViewSyallabus";
 
 const Course = () => {
-  const [showaddcourse, setShowAddCourse] = useState(true);
-  const [showviewcourse, setShowViewCourse] = useState(false);
+  const [showaddcourse, setShowAddCourse] = useState(false);
+  const [showviewcourse, setShowViewCourse] = useState(true);
 
   const myFunction1 = () => {
     setShowViewCourse(false);
@@ -23,11 +23,11 @@ const Course = () => {
             className="border-2 text-3xl px-2 bg-[#0072C6] text-white py-2 rounded-xl mr-10">
             Addsyllabus
           </button>
-          {/* <button
+          <button
             onClick={myFunction2}
             className="border-2  text-3xl  px-2 mr-10 bg-[#0072C6] text-white py-2 rounded-xl">
             Viewsyllabus
-          </button> */}
+          </button>
           <div className="flex flex-col">
             {showaddcourse && <AddSyallabus />}
           </div>

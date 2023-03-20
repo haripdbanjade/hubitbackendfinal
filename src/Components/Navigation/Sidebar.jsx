@@ -33,11 +33,6 @@ const obj = [
       },
 
       {
-        title: "Syallabus",
-        icon: <FiPhoneCall />,
-        path: "/syallabus",
-      },
-      {
         title: "instructor",
         icon: <SiInstructables />,
         path: "/instructor",

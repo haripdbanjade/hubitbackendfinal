@@ -3,8 +3,8 @@ import AddCourse from "./AddCourse";
 import ViewCourses from "./ViewCourses";
 
 const Course = () => {
-  const [showaddcourse, setShowAddCourse] = useState(true);
-  const [showviewcourse, setShowViewCourse] = useState(false);
+  const [showaddcourse, setShowAddCourse] = useState(false);
+  const [showviewcourse, setShowViewCourse] = useState(true);
 
   const myFunction1 = () => {
     setShowViewCourse(false);

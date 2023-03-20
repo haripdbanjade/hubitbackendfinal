@@ -1,148 +1,41 @@
-import React, { useEffect, useState } from "react";
-import { Formik, Field, Form, ErrorMessage } from "formik";
-import { toast, ToastContainer } from "react-toastify";
-import axios from "axios";
-import * as yup from "yup";
-import { useParams } from "react-router-dom";
-const G_URL = "https://fullel-backend.adaptable.app/syallabus";
-const P_URL = "https://fullel-backend.adaptable.app/syallabus/subsection";
-
-const schema = yup.object().shape({
-  section_id: yup.string().required("course  is required"),
-  subSection: yup.string().required("section  is required"),
-
-  // image: yup.string().required("File is required"),
-});
-
-const FormFields = [
-  {
-    name: "section_id",
-    type: "select",
-    options: [],
-  },
-  {
-    name: "subSection",
-    type: "text",
-  },
-];
+import React, { useState } from "react";
+import AddSubSection from "./AddSubSection";
+import AddSyallabus from "./AddSyallabus";
+import ViewSubSection from "./ViewSubSection";
+import ViewSyallabus from "./ViewSyallabus";
 
 const SubSection = () => {
-  const [course, setCourse] = useState([]);
-  const { id } = useParams();
+  const [showaddcourse, setShowAddCourse] = useState(false);
+  const [showviewcourse, setShowViewCourse] = useState(true);
 
-  const getCourse = async () => {
-    const res = await axios.get(`${G_URL}/${id}`);
-    setCourse(res.data);
+  const myFunction1 = () => {
+    setShowViewCourse(false);
+    setShowAddCourse(true);
   };
-  const postFormData = async (val) => {
-    console.log(val);
-    try {
-      await axios.post(`${P_URL}/${id}`, val).then((res) => {
-        if (res.status === 201) {
-          toast.success("the data posted");
-        }
-      });
-    } catch (error) {
-      toast.error("the data could not posted");
-      console.log(error);
-    }
+  const myFunction2 = () => {
+    setShowAddCourse(false);
+    setShowViewCourse(true);
   };
-
-  useEffect(() => {
-    getCourse();
-  }, []);
-  let initData = [
-    {
-      _id: "0",
-      Section: "Choose subSyllabus",
-    },
-  ];
-
-  FormFields[0].options = [...initData, ...course];
   return (
     <div>
-      <div className="mt-20 px-20">
-        <Formik
-          initialValues={{
-            section_id: "",
-            subSection: "",
-            // Section_id: "",
-          }}
-          validationSchema={schema}
-          onSubmit={(val) => {
-            console.log(val);
-            postFormData(val);
-          }}>
-          {({ handleSubmit, values }) => {
-            return (
-              <Form onSubmit={handleSubmit}>
-                <div className="grid grid-cols-2 gap-4">
-                  {FormFields.map((val, i) => {
-                    if (val.type === "select") {
-                      return (
-                        <div key={i}>
-                          <label
-                            htmlFor={val.name}
-                            className="block font-bold mb-2">
-                            {val.name}
-                          </label>
-                          <Field
-                            as={val.type}
-                            placeholder={`enter ${val.name}`}
-                            name={val.name}
-                            className="border border-gray-400 p-2 rounded w-full">
-                            {val.options?.map((val, i) => {
-                              return (
-                                <option value={val.section_id} key={i}>
-                                  {val.Section}
-                                </option>
-                              );
-                            })}
-                          </Field>
-                          <ErrorMessage
-                            name={val.name}
-                            component={"div"}
-                            className="text-red-600"
-                          />
-                        </div>
-                      );
-                    } else {
-                      return (
-                        <div key={i}>
-                          <label
-                            htmlFor={val.name}
-                            className="block font-bold mb-2">
-                            {val.name}
-                          </label>
-                          <Field
-                            type={val.type}
-                            placeholder={`enter ${val.name}`}
-                            name={val.name}
-                            className="border border-gray-400 p-2 rounded w-full"
-                          />
-                          <ErrorMessage
-                            name={val.name}
-                            component={"div"}
-                            className="text-red-600"
-                          />
-                        </div>
-                      );
-                    }
-                  })}
-                  <ToastContainer />
-                </div>
-
-                <button
-                  type={"submit"}
-                  className="bg-mainColor mt-10 hover:bg-blue-700 text-white font-bold py-2 px-4  rounded">
-                  Submit
-                </button>
-              </Form>
-            );
-          }}
-        </Formik>
+      <div className="main_data">
+        <div className="mt-10 ml-10">
+          <button
+            onClick={myFunction1}
+            className="border-2 text-3xl px-2 bg-[#0072C6] text-white py-2 rounded-xl mr-10">
+            AddSubSection
+          </button>
+          <button
+            onClick={myFunction2}
+            className="border-2  text-3xl  px-2 mr-10 bg-[#0072C6] text-white py-2 rounded-xl">
+            ViewSubSection
+          </button>
+          <div className="flex flex-col">
+            {showaddcourse && <AddSubSection />}
+          </div>
+          <div className="">{showviewcourse && <ViewSubSection />}</div>
+        </div>
       </div>
-      
     </div>
   );
 };

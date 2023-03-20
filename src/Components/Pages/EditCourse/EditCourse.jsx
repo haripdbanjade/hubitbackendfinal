@@ -113,7 +113,7 @@ const EditCourse = () => {
   ];
   FormFields[1].option = [...category];
   return (
-    <div className="flex mt-10 border-2 hover:border-2 shadow-lg w-full px-10 py-6 hover:border-blue-500 transition-all delay-200 duration-200 relative ">
+    <div className="flex mt-10 border-2 hover:border-2 shadow-lg w-[800px] px-10 py-6 hover:border-blue-500 transition-all delay-200 duration-200 relative ">
       <AiFillPlusCircle
         className="absolute right-9 top-24 text-3xl "
         onClick={() => {

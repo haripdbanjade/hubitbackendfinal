@@ -39,10 +39,13 @@ const AddCategorys = () => {
       // formData.append("description", e.description);
       formData.append("file", first[0]);
 
-      return axios.post(
-        "https://fullel-backend.adaptable.app/category/files",
-        formData
-      );
+      return axios
+        .post("https://fullel-backend.adaptable.app/category/files", formData)
+        .then((res) => {
+          if (res.status === 201) {
+            toast.success("The data is submitted");
+          }
+        });
     } catch (err) {
       console.log(err);
     }

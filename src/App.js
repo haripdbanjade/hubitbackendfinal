@@ -11,11 +11,14 @@ import LoginPage from "./Components/Pages/LoginPage/LoginPage";
 import MainPage from "./Components/Pages/MainPage";
 import OnlineForm from "./Components/Pages/OnlineForm/OnlineForm";
 import QuickCall from "./Components/Pages/QuickCall/QuickCall";
+import AddSubSection from "./Components/Pages/Syallabus/AddSubSection";
 import SubSection from "./Components/Pages/Syallabus/SubSection";
-import SubCourse from "./Components/Pages/Syallabus/SubSection";
+import SubCourse from "./Components/Pages/Syallabus/AddSubSection";
 import Syallabus from "./Components/Pages/Syallabus/Syallabus";
 import ViewSyallabus from "./Components/Pages/Syallabus/ViewSyallabus";
 import Layout from "./HOC/Layout/Layout";
+import EditSyallabus from "./Components/Pages/Syallabus/EditSyallabus";
+import EditCategorys from "./Components/Pages/Categorys/EditCategorys";
 
 const App = () => {
   return (
@@ -34,8 +37,14 @@ const App = () => {
             <Route exact path="/syallabus" element={<Syallabus />} />
             <Route exact path="/onlineform" element={<OnlineForm />} />
             <Route exact path="/instructor" element={<Instructor />} />
-            <Route exact path="/syllabus/:id" element={<ViewSyallabus />} />
+            <Route exact path="/syllabus/:id" element={<Syallabus />} />
             <Route exact path="/subcourse/:id" element={<SubSection />} />
+            <Route exact path="/category/:id" element={<EditCategorys />} />
+            <Route
+              exact
+              path="/editsyallabus/:id"
+              element={<EditSyallabus />}
+            />
           </Routes>
         </Layout>
       </Router>

@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { ToastContainer, toast } from "react-toastify";
+import { useLocation } from "react-router-dom";
+
 import "react-toastify/dist/ReactToastify.css";
 import * as yup from "yup";
 
@@ -9,7 +11,7 @@ import * as yup from "yup";
 const schema = yup.object().shape({
   // course_name: yup.string().required("Course Name is required"),
   category_name: yup.string().required(" Category name  is required"),
-  color: yup.string().required("color is required"),
+  // color: yup.string().required("color is required"),
   // description: yup.string().required("Description is required"),
   // image: yup.string().required("File is required"),
 });
@@ -23,21 +25,23 @@ function NewCategorys() {
       const formData = new FormData();
       // formData.append("course_name", e.course_name);
       formData.append("category_name", e.category_name);
-      formData.append("color", e.color);
-      // formData.append("description", e.description);
-      formData.append("file", first[0]);
+      //   formData.append("color", e.color);
+      //   // formData.append("description", e.description);
+      //   formData.append("file", first[0]);
 
-      return axios
-        .post("https://hubitbackend.onrender.com/category/files", formData)
-        .then((res) => {
-          if (res.status === 201) {
-            toast.success("Data submitted successfully");
-          }
-        });
+      return axios.put(
+        "https://hubitbackend.onrender.com/category/files",
+        formData
+      );
     } catch (err) {
       console.log(err);
     }
   };
+  const location = useLocation();
+
+  useEffect(() => {
+    setCategory(location.state);
+  }, []);
   const handleChange = (e) => {
     console.log(e.target.files);
     setfirst(e.target.files);
@@ -50,10 +54,10 @@ function NewCategorys() {
       type: "text",
       // as: "select",
     },
-    {
-      name: "color",
-      type: "text",
-    },
+    // {
+    //   name: "color",
+    //   type: "text",
+    // },
   ];
 
   return (
@@ -67,10 +71,10 @@ function NewCategorys() {
         <Formik
           initialValues={{
             // course_name: "",
-            category_name: "",
-            color: "",
-            // description: "",
-            image: "",
+            category_name: location.state.category_name,
+            // color: "",
+            // // description: "",
+            // image: "",
           }}
           validationSchema={schema}
           onSubmit={(val) => {
@@ -78,6 +82,7 @@ function NewCategorys() {
             postFormData(val);
 
             // Submit message
+            toast.success("Submit Successfully!!");
           }}>
           {({ handleSubmit, values }) => {
             return (
@@ -114,7 +119,7 @@ function NewCategorys() {
                     </div>
 
                     <div className="flex flex-col items-center justify-center mt-4">
-                      <label htmlFor="image" className="mb-2">
+                      {/* <label htmlFor="image" className="mb-2">
                         <img
                           src={
                             newImg
@@ -135,7 +140,7 @@ function NewCategorys() {
                         required
                         className="hidden"
                         onChange={handleChange}
-                      />
+                      /> */}
                     </div>
 
                     <div className="flex justify-center mt-6">
