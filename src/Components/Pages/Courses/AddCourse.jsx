@@ -7,10 +7,23 @@ import { AiFillPlusCircle } from "react-icons/ai";
 import AddCategorys from "../Categorys/AddCategorys";
 
 const schema = yup.object().shape({
-  course_name: yup.string().required("Course Name is required"),
+  course_name: yup
+    .string()
+    .matches(
+      /^[-a-zA-Z0-9-()]+(\s+[-a-zA-Z0-9-()]+)*$/,
+      "Not Whitespace at first and last"
+    )
+    .required("Course Name is required"),
+
   course_category: yup.string().required("Course Category  is required"),
   duration: yup.string().required("Course Duration is required"),
-  description: yup.string().required("Description is required"),
+  description: yup
+    .string()
+    .matches(
+      /^[-a-zA-Z0-9-()]+(\s+[-a-zA-Z0-9-()]+)*$/,
+      "Not Whitespace at first and last"
+    )
+    .required("Description is required"),
 });
 const FormFields = [
   {

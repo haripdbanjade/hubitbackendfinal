@@ -27,7 +27,7 @@ function OnlineForm() {
   const handleDelete = (_id) => {
     axios
       .delete(
-        `https://fullel-backend.adaptable.app/inquire/${_id}`,
+        `https://fullel-backend.adaptable.app/onlineform/${_id}`,
         handleDelete
       )
       .then((res) => console.log("deleted", res))

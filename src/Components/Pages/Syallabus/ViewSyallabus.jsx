@@ -4,7 +4,8 @@ import { GrUpdate } from "react-icons/gr";
 import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 
-const URL = "https://fullel-backend.adaptable.app/syallabus";
+const URL =
+  "https://fullel-backend.adaptable.app/syallabus/6416ea1d90ba084c41d39fc3";
 
 function ViewSyallabus() {
   const [syallabus, setSyallabus] = useState([]);
@@ -14,7 +15,7 @@ function ViewSyallabus() {
 
   const fetchData = async () => {
     try {
-      const res = await axios.get(`${URL}/${id}`);
+      const res = await axios.get(`${URL}`);
       setSyallabus(res.data);
       console.log(res.data);
     } catch (error) {
