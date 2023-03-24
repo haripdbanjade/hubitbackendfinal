@@ -69,7 +69,7 @@ const AddSubSection = () => {
     },
   ];
 
-  FormFields[0].options = [...initData, ...course];
+  FormFields[0].options = [...course];
   return (
     <div>
       {loading ? (
@@ -103,6 +103,9 @@ const AddSubSection = () => {
                               placeholder={`enter ${val.name}`}
                               name={val.name}
                               className="border border-gray-400 p-2 rounded w-full">
+                              <option value="" selected disabled>
+                                {initData[0].Section}
+                              </option>
                               {val.options?.map((val, i) => {
                                 return (
                                   <option value={val.section_id} key={i}>

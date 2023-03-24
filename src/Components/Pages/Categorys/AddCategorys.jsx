@@ -7,8 +7,14 @@ import * as yup from "yup";
 
 const schema = yup.object().shape({
   // course_name: yup.string().required("Course Name is required"),
-  category_name: yup.string().required("  name  is required"),
-  color: yup.string().required("color is required"),
+  category_name: yup
+    .string()
+    .matches(
+      /^[-a-zA-Z0-9-()]+(\s+[-a-zA-Z0-9-()]+)*$/,
+      "Not Whitespace at first and last"
+    )
+    .required("  name  is required"),
+  // color: yup.string().required("color is required"),
   // description: yup.string().required("Description is required"),
   // image: yup.string().required("File is required"),
 });
@@ -38,7 +44,7 @@ const AddCategorys = () => {
       formData.append("color", e.color);
       // formData.append("description", e.description);
       formData.append("file", first[0]);
-
+      console.log(formData);
       return axios
         .post("https://fullel-backend.adaptable.app/category/files", formData)
         .then((res) => {
@@ -121,7 +127,7 @@ const AddCategorys = () => {
                 // onSubmit={postFormData}
                 type={"file"}
                 accept=".png,.jpg,.jpeg,.gif"
-                required
+                // required
                 // onChange={e => {
                 //   setfirst(e.target.files[0]);
                 // }}

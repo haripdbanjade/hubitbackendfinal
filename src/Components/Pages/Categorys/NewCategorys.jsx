@@ -8,8 +8,14 @@ import * as yup from "yup";
 // validation section
 const schema = yup.object().shape({
   // course_name: yup.string().required("Course Name is required"),
-  category_name: yup.string().required(" Category name  is required"),
-  color: yup.string().required("color is required"),
+  category_name: yup
+    .string()
+    .matches(
+      /^[-a-zA-Z0-9-()]+(\s+[-a-zA-Z0-9-()]+)*$/,
+      "Not Whitespace at first and last"
+    )
+    .required(" Category name  is required"),
+  // color: yup.string().required("color is required"),
   // description: yup.string().required("Description is required"),
   // image: yup.string().required("File is required"),
 });
@@ -132,7 +138,7 @@ function NewCategorys() {
                         id="image"
                         type="file"
                         accept=".png,.jpg,.jpeg,.gif"
-                        required
+                        // required
                         className="hidden"
                         onChange={handleChange}
                       />

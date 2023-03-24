@@ -71,6 +71,8 @@ const EditCourse = () => {
       formData.append("description", e.description);
       formData.append("file", first[0]);
 
+      console.log(formData);
+
       axios.put(
         `https://hubitbackend.onrender.com/course/files/${id}`,
         formData
@@ -209,7 +211,7 @@ const EditCourse = () => {
                       src={
                         newImg
                           ? URL.createObjectURL(newImg)
-                          : "https://images.unsplash.com/photo-1604537529428-15bcbeecfe4d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1169&q=80"
+                          : location.state.image
                       }
                       className="w-56 mx-auto p-2 mt-6"
                       alt="preview"
