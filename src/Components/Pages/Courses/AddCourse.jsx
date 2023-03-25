@@ -5,6 +5,7 @@ import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import { AiFillPlusCircle } from "react-icons/ai";
 import AddCategorys from "../Categorys/AddCategorys";
+import LoadingPage from "../Loading/LoadingPage";
 
 const schema = yup.object().shape({
   course_name: yup
@@ -50,6 +51,7 @@ const AddCourse = () => {
   const [first, setfirst] = useState("");
   const [newImg, setNewImg] = useState("");
   const [showCategorys, setShowCategorys] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const postFormData = (e) => {
     // e.img = first;
@@ -60,11 +62,22 @@ const AddCourse = () => {
       formData.append("duration", e.duration);
       formData.append("description", e.description);
       formData.append("file", first[0]);
+      setLoading(true);
 
-      axios.post("https://fullel-backend.adaptable.app/course/files", formData);
-      toast.success("Data posted sucessfully");
+      axios
+        .post("https://fullel-backend.adaptable.app/course/files", formData)
+        .then((res) => {
+          if (res.status >= 200 && res.status <= 301) {
+            toast.success("Data posted sucessfully");
+            setLoading(false);
+          }
+        })
+        .catch((err) => {
+          setLoading(false);
+        });
     } catch (err) {
       toast.error("Data could not posted");
+      setLoading(false);
       console.log(err);
     }
   };
@@ -100,129 +113,135 @@ const AddCourse = () => {
   ];
   FormFields[1].options = [...category];
   return (
-    <div className="flex mt-10 border-2 hover:border-2 shadow-lg w-[800px] px-10 py-6 hover:border-blue-500 transition-all delay-200 duration-200 relative ">
-      <AiFillPlusCircle
-        className="absolute right-11 top-24 text-2xl "
-        onClick={() => {
-          setShowCategorys(!showCategorys);
-        }}
-      />
+    <div>
+      {loading ? (
+        <LoadingPage />
+      ) : (
+        <div className="flex mt-10 border-2 hover:border-2 shadow-lg w-[800px] px-10 py-6 hover:border-blue-500 transition-all delay-200 duration-200 relative ">
+          <AiFillPlusCircle
+            className="absolute right-11 top-24 text-2xl "
+            onClick={() => {
+              setShowCategorys(!showCategorys);
+            }}
+          />
 
-      <div className="bg-white w-full rounded-md p-8">
-        <Formik
-          initialValues={{
-            course_name: "",
-            course_category: "",
-            duration: "",
-            description: "",
-            image: "",
-          }}
-          validationSchema={schema}
-          onSubmit={(val) => {
-            postFormData(val);
-          }}>
-          {({ handleSubmit, values }) => {
-            return (
-              <Form encType="multipart/form-data" onSubmit={handleSubmit}>
-                <div className="grid grid-cols-2 gap-4">
-                  {FormFields.map((val, i) => {
-                    if (val.type === "select") {
-                      return (
-                        <div key={i}>
-                          <label
-                            htmlFor={val.name}
-                            className="block font-bold mb-2">
-                            {val.name}
-                          </label>
-                          <Field
-                            as={val.type}
-                            placeholder={`enter ${val.name}`}
-                            name={val.name}
-                            className="border border-gray-400 p-2 rounded w-full">
-                            <option value="" selected disabled>
-                              {initData[0].category_name}
-                            </option>
-                            {val.options?.map((val, i) => {
-                              return (
-                                <option value={val.category_name} key={i}>
-                                  {val.category_name}
+          <div className="bg-white w-full rounded-md p-8">
+            <Formik
+              initialValues={{
+                course_name: "",
+                course_category: "",
+                duration: "",
+                description: "",
+                image: "",
+              }}
+              validationSchema={schema}
+              onSubmit={(val) => {
+                postFormData(val);
+              }}>
+              {({ handleSubmit, values }) => {
+                return (
+                  <Form encType="multipart/form-data" onSubmit={handleSubmit}>
+                    <div className="grid grid-cols-2 gap-4">
+                      {FormFields.map((val, i) => {
+                        if (val.type === "select") {
+                          return (
+                            <div key={i}>
+                              <label
+                                htmlFor={val.name}
+                                className="block font-bold mb-2">
+                                {val.name}
+                              </label>
+                              <Field
+                                as={val.type}
+                                placeholder={`enter ${val.name}`}
+                                name={val.name}
+                                className="border border-gray-400 p-2 rounded w-full">
+                                <option value="" selected disabled>
+                                  {initData[0].category_name}
                                 </option>
-                              );
-                            })}
-                          </Field>
+                                {val.options?.map((val, i) => {
+                                  return (
+                                    <option value={val.category_name} key={i}>
+                                      {val.category_name}
+                                    </option>
+                                  );
+                                })}
+                              </Field>
 
-                          <ErrorMessage
-                            name={val.name}
-                            component={"div"}
-                            className="text-red-600"
-                          />
-                        </div>
-                      );
-                    } else {
-                      return (
-                        <div key={i}>
-                          <label
-                            htmlFor={val.name}
-                            className="block font-bold mb-2">
-                            {val.name}
-                          </label>
-                          <Field
-                            type={val.type}
-                            placeholder={`enter ${val.name}`}
-                            name={val.name}
-                            className="border border-gray-400 p-2 rounded w-full"
-                          />
-                          <ErrorMessage
-                            name={val.name}
-                            component={"div"}
-                            className="text-red-600"
-                          />
-                        </div>
-                      );
-                    }
-                  })}
-                  <ToastContainer />
-                </div>
+                              <ErrorMessage
+                                name={val.name}
+                                component={"div"}
+                                className="text-red-600"
+                              />
+                            </div>
+                          );
+                        } else {
+                          return (
+                            <div key={i}>
+                              <label
+                                htmlFor={val.name}
+                                className="block font-bold mb-2">
+                                {val.name}
+                              </label>
+                              <Field
+                                type={val.type}
+                                placeholder={`enter ${val.name}`}
+                                name={val.name}
+                                className="border border-gray-400 p-2 rounded w-full"
+                              />
+                              <ErrorMessage
+                                name={val.name}
+                                component={"div"}
+                                className="text-red-600"
+                              />
+                            </div>
+                          );
+                        }
+                      })}
+                    </div>
 
-                <label htmlFor="image">
-                  {console.log(newImg ? "work" : "none", "fired")}
-                  <img
-                    src={
-                      newImg
-                        ? URL.createObjectURL(newImg)
-                        : "https://images.unsplash.com/photo-1604537529428-15bcbeecfe4d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1169&q=80"
-                    }
-                    className="w-56 mx-auto p-2 mt-6"
-                    alt="preview"
-                  />
-                </label>
-                <input
-                  id="image"
-                  // onSubmit={postFormData}
-                  type={"file"}
-                  accept=".png,.jpg,.jpeg,.gif"
-                  required
-                  // onChange={e => {
-                  //   setfirst(e.target.files[0]);
-                  // }}
-                  onChange={handleChange}
-                />
-                <button
-                  type="submit"
-                  className="bg-mainColor mt-10 hover:bg-blue-700 text-white font-bold py-2 px-4  rounded">
-                  Submit
-                </button>
-              </Form>
-            );
-          }}
-        </Formik>
-      </div>
-      <div>
-        {" "}
-        <div className="relative top-[-230px] left-96 right-24">
-          {showCategorys && <AddCategorys />}
+                    <label htmlFor="image">
+                      {console.log(newImg ? "work" : "none", "fired")}
+                      <img
+                        src={
+                          newImg
+                            ? URL.createObjectURL(newImg)
+                            : "https://images.unsplash.com/photo-1604537529428-15bcbeecfe4d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1169&q=80"
+                        }
+                        className="w-56 mx-auto p-2 mt-6"
+                        alt="preview"
+                      />
+                    </label>
+                    <input
+                      id="image"
+                      // onSubmit={postFormData}
+                      type={"file"}
+                      accept=".png,.jpg,.jpeg,.gif"
+                      required
+                      // onChange={e => {
+                      //   setfirst(e.target.files[0]);
+                      // }}
+                      onChange={handleChange}
+                    />
+                    <button
+                      type="submit"
+                      className="bg-mainColor mt-10 hover:bg-blue-700 text-white font-bold py-2 px-4  rounded">
+                      Submit
+                    </button>
+                  </Form>
+                );
+              }}
+            </Formik>
+          </div>
+          <div>
+            {" "}
+            <div className="relative top-[-230px] left-96 right-24">
+              {showCategorys && <AddCategorys />}
+            </div>
+          </div>
+          <ToastContainer />
         </div>
-      </div>
+      )}
     </div>
   );
 };

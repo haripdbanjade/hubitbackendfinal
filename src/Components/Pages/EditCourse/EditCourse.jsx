@@ -73,11 +73,13 @@ const EditCourse = () => {
 
       console.log(formData);
 
-      axios.put(
-        `https://hubitbackend.onrender.com/course/files/${id}`,
-        formData
-      );
-      toast.success("Data posted sucessfully");
+      axios
+        .put(`https://hubitbackend.onrender.com/course/files/${id}`, formData)
+        .then((res) => {
+          if (res.status === 200 || 201) {
+            toast.success("Course updated sucessfully");
+          }
+        });
     } catch (err) {
       toast.error("Data could not posted");
       console.log(err);

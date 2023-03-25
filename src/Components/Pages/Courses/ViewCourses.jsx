@@ -4,6 +4,7 @@ import { RiDeleteBin6Line } from "react-icons/ri";
 import { Link } from "react-router-dom";
 import { GrUpdate } from "react-icons/gr";
 import { HiOutlineArrowNarrowRight } from "react-icons/hi";
+import { toast, ToastContainer } from "react-toastify";
 
 function ViewCourse() {
   const [course, setCourse] = useState([]);
@@ -28,13 +29,17 @@ function ViewCourse() {
   }, []);
   // Delete request
   const handleDelete = (_id) => {
-    axios.delete(
-      `https://fullel-backend.adaptable.app/course/${_id}`,
-      handleDelete
-    );
-    alert(`Deleting item whose id is ${_id}`)
-      .then((res) => console.log("deleted", res))
-      .catch((err) => console.log(err));
+    alert(`Deleting item whose id is ${_id}`);
+    axios
+      .delete(
+        `https://fullel-backend.adaptable.app/course/${_id}`,
+        handleDelete
+      )
+      .then((res) => {
+        if (res.status >= 200 && res.status <= 301) {
+          toast.success("the course is deleted succefully");
+        }
+      });
   };
   // const handleUpdate = (_id) => {
   //   // update request
@@ -127,6 +132,7 @@ function ViewCourse() {
           ))}
         </tbody>
       </table>
+      <ToastContainer />
     </div>
   );
 }
